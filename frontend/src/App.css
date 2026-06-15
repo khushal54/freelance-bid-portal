@@ -108,3 +108,34 @@ button:hover {
 p {
   line-height: 1.5;
 }
+
+.bid-box {
+  background: #f1f5f9;
+  border-left: 4px solid #2563eb;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+}
+
+.bid-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.reject-btn {
+  background: #dc2626;
+}
+
+.negotiate-btn {
+  background: #f59e0b;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0 25px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}

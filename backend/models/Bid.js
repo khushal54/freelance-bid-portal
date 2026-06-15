@@ -4,18 +4,34 @@ const bidSchema = new mongoose.Schema(
   {
     project: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project"
+      ref: "Project",
     },
     bidder: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     amount: Number,
     message: String,
     status: {
       type: String,
-      default: "pending"
-    }
+      enum: [
+        "pending",
+        "creator_negotiation",
+        "bidder_negotiation",
+        "accepted",
+        "rejected",
+      ],
+      default: "pending",
+    },
+    negotiationMessage: {
+      type: String,
+      default: "",
+    },
+    lastNegotiatedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
   },
   { timestamps: true }
 );

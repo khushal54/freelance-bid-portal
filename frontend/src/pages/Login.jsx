@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
       alert("Login successful");
-      navigate("/");
+      navigate("/projects");
       window.location.reload();
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");

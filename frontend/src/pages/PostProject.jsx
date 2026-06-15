@@ -22,7 +22,7 @@ const PostProject = () => {
     try {
       await api.post("/api/projects", form);
       alert("Project posted successfully");
-      navigate("/");
+      navigate("/projects");
     } catch (error) {
       alert(error.response?.data?.message || "Project posting failed");
     }

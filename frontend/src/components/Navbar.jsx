@@ -16,7 +16,7 @@ const Navbar = () => {
       <h2>CampusBid</h2>
 
       <div>
-        <Link to="/">Projects</Link>
+        <Link to="/projects">Projects</Link>
 
         {token && <Link to="/post-project">Post Project</Link>}
         {token && <Link to="/dashboard">Dashboard</Link>}

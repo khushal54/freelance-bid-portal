@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const projects = await Project.find()
+    const projects = await Project.find({
+  status: { $ne: "assigned" }
+})
       .populate("postedBy", "name email college")
       .sort({ createdAt: -1 });
 

@@ -17,30 +17,47 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:id" element={<ProjectDetails />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+     <Routes>
+  <Route path="/" element={<Login />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/post-project"
-          element={
-            <ProtectedRoute>
-              <PostProject />
-            </ProtectedRoute>
-          }
-        />
+  <Route
+    path="/projects"
+    element={
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+  <Route
+    path="/projects/:id"
+    element={
+      <ProtectedRoute>
+        <ProjectDetails />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/post-project"
+    element={
+      <ProtectedRoute>
+        <PostProject />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/dashboard"
+    element={
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    }
+  />
+</Routes>
     </BrowserRouter>
   );
 };
