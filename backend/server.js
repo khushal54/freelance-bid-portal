@@ -12,10 +12,17 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: "*",
-  credentials: true
-}));
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CLIENT_URL,
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
