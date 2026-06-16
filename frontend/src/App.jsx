@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/protectedRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PostProject from "./pages/PostProject";
-import ProjectDetails from "./pages/ProjectDetails";
+import ProjectDetails from "./pages/projectDetails";
 import Dashboard from "./pages/Dashboard";
 
 import "./App.css";
