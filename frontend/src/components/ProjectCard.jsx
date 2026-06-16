@@ -4,6 +4,9 @@ const ProjectCard = ({ project }) => {
   return (
     <div className="card">
       <h2>{project.title}</h2>
+
+      <p className="category-badge">{project.category || "Other"}</p>
+
       <p>{project.description}</p>
 
       <h3>₹{project.budget}</h3>

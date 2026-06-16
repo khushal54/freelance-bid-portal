@@ -7,9 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const projects = await Project.find({
-  status: { $ne: "assigned" }
-})
+    const projects = await Project.find({ status: "open" })
       .populate("postedBy", "name email college")
       .sort({ createdAt: -1 });
 
@@ -21,14 +19,15 @@ router.get("/", async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
-    const { title, description, budget, deadline } = req.body;
+    const { title, description, budget, deadline, category } = req.body;
 
     const project = await Project.create({
       title,
       description,
       budget,
       deadline,
-      postedBy: req.user.id
+      category,
+      postedBy: req.user.id,
     });
 
     res.status(201).json(project);
@@ -39,11 +38,14 @@ router.post("/", auth, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id)
-      .populate("postedBy", "name email college");
+    const project = await Project.findById(req.params.id).populate(
+      "postedBy",
+      "name email college"
+    );
 
     const bids = await Bid.find({ project: req.params.id })
-      .populate("bidder", "name email skills college");
+      .populate("bidder", "name email skills college")
+      .sort({ createdAt: -1 });
 
     res.json({ project, bids });
   } catch {
@@ -59,7 +61,7 @@ router.post("/:id/bids", auth, async (req, res) => {
       project: req.params.id,
       bidder: req.user.id,
       amount,
-      message
+      message,
     });
 
     res.status(201).json(bid);

@@ -10,6 +10,7 @@ const PostProject = () => {
     description: "",
     budget: "",
     deadline: "",
+    category: "Web Development",
   });
 
   const handleChange = (e) => {
@@ -35,7 +36,17 @@ const PostProject = () => {
       <form onSubmit={postProject} className="form">
         <input name="title" placeholder="Project Title" onChange={handleChange} required />
 
-        <textarea name="description" placeholder="Project Description" onChange={handleChange} required></textarea>
+        <textarea name="description" placeholder="Project Description" onChange={handleChange} required />
+
+        <select name="category" value={form.category} onChange={handleChange}>
+          <option>Web Development</option>
+          <option>Mobile App</option>
+          <option>UI/UX Design</option>
+          <option>Content Writing</option>
+          <option>Video Editing</option>
+          <option>AI/ML</option>
+          <option>Other</option>
+        </select>
 
         <input name="budget" type="number" placeholder="Budget" onChange={handleChange} required />
 

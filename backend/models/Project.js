@@ -6,19 +6,36 @@ const projectSchema = new mongoose.Schema(
     description: String,
     budget: Number,
     deadline: String,
+
+    category: {
+      type: String,
+      enum: [
+        "Web Development",
+        "Mobile App",
+        "UI/UX Design",
+        "Content Writing",
+        "Video Editing",
+        "AI/ML",
+        "Other",
+      ],
+      default: "Other",
+    },
+
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
+
     status: {
       type: String,
-      default: "open"
+      default: "open",
     },
+
     acceptedBid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Bid",
-      default: null
-    }
+      default: null,
+    },
   },
   { timestamps: true }
 );
