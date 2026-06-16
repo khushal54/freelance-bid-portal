@@ -5,6 +5,8 @@ import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
+
+//accept bid
 router.put("/:id/accept", auth, async (req, res) => {
   try {
     const bid = await Bid.findById(req.params.id);
@@ -40,6 +42,8 @@ router.put("/:id/accept", auth, async (req, res) => {
   }
 });
 
+
+//reject bid
 router.put("/:id/reject", auth, async (req, res) => {
   try {
     const bid = await Bid.findById(req.params.id);
@@ -66,6 +70,8 @@ router.put("/:id/reject", auth, async (req, res) => {
   }
 });
 
+
+//negoatiate bid
 router.put("/:id/negotiate", auth, async (req, res) => {
   try {
     const { negotiationMessage } = req.body;

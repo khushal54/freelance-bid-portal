@@ -5,6 +5,7 @@ import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
+//get projects
 router.get("/", async (req, res) => {
   try {
     const projects = await Project.find({ status: "open" })
@@ -17,6 +18,8 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+//post project
 router.post("/", auth, async (req, res) => {
   try {
     const { title, description, budget, deadline, category } = req.body;
@@ -36,6 +39,8 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+
+//get specific by id
 router.get("/:id", async (req, res) => {
   try {
     const project = await Project.findById(req.params.id).populate(
@@ -67,6 +72,38 @@ router.post("/:id/bids", auth, async (req, res) => {
     res.status(201).json(bid);
   } catch {
     res.status(500).json({ message: "Failed to place bid" });
+  }
+});
+
+
+
+//mark as complete
+router.put("/:id/complete", auth, async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (project.postedBy.toString() !== req.user.id) {
+      return res.status(403).json({
+        message: "Only project creator can mark project as completed",
+      });
+    }
+
+    if (project.status !== "assigned") {
+      return res.status(400).json({
+        message: "Only assigned projects can be marked as completed",
+      });
+    }
+
+    project.status = "completed";
+    await project.save();
+
+    res.json({ message: "Project marked as completed", project });
+  } catch {
+    res.status(500).json({ message: "Failed to complete project" });
   }
 });
 

@@ -28,6 +28,7 @@ const projectSchema = new mongoose.Schema(
 
     status: {
       type: String,
+      enum: ["open", "assigned", "completed"],
       default: "open",
     },
 
